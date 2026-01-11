@@ -13,7 +13,7 @@ describe('Number Input', () => {
     expect(screen.getByLabelText('Value2')).toHaveValue('11');
   });
 
-  it('udate input', async () => {
+  it('udate input waitFor', async () => {
     render(<App />);
 
     await userEvent.clear(screen.getByLabelText('Value1'));
@@ -24,5 +24,15 @@ describe('Number Input', () => {
     await waitFor(() => {
       expect(screen.getByLabelText('Value2')).toHaveValue('11');
     });
+  });
+
+  it('udate plain input', async () => {
+    render(<App />);
+
+    await userEvent.clear(screen.getByLabelText('Plain Input 1'));
+    await userEvent.paste('20');
+
+    expect(screen.getByLabelText('Plain Input 1')).toHaveValue('20');
+    expect(screen.getByLabelText('Plain Input 2')).toHaveValue('21');
   });
 });
